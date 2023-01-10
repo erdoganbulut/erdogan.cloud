@@ -46,6 +46,17 @@ button {
   }
 }
 
+ul {
+  &.services-list {
+    li {
+      margin-bottom: 0.5rem;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
 .container {
   width: 100%;
   padding-right: 1rem;

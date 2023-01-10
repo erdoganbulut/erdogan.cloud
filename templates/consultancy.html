@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block head %}
+<title>Erdoğan BULUT - Consultancy</title>
+{% endblock head %}
+{% block content %}
+  <section class="section">
+    <div class="container">
+      <div class="section__inner-item">
+        <h2 class="section--title">Consultancy</h2>
+        <div class="section--content">
+          <p>I have been involved in software development for 16+ years and I have 10+ years of professional experience in software development. During this time, I have developed many websites, web applications, large-scale software products. I gained experience in many areas from leading the software team to code-review processes and software architectures. You can get consultancy service from me for your needs in line with my experience and experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <div class="section__inner-item">
+        <h2 class="section--title">Services</h2>
+        <div class="section--content">
+          <p>Some of the titles you can get consultancy service are as follows:</p>
+          <ul class="services-list">
+            <li>Frontend Development: developing large-scale web applications and small web projects by creating quality code architectures that are sustainable, follow best practices</li>
+            <li>Code-Review: code-review service for the development of your software projects by sustainable and following best practices</li>
+            <li>Problem Solving and Counseling: getting assistance for the challenges you encounter in development process or guiding you to create projects those meet software principles</li>
+            <li>Algorithmic Trading: developing cryptocurrency trading robots and technical analysis indicators</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__inner-item">
+        <h2 class="section--title">Pricing</h2>
+        <div class="section--content">
+          <p>I follow the "pay as you go" price policy, as I aim to provide scalability and flexibility. It is calculated based on a fixed hourly price and the time you receive the service, not the size of the project, brand or customer.</p>
+          <p>
+            $ 30 / hourly
+          </p>
+          <p>
+            <small><em>* excluding taxes, may vary depending on countries, payment method and work model</em></small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <div class="section__inner-item">
+        <h2 class="section--title">Contact</h2>
+        <div class="section--content">
+          <p>
+            <span class="email-property">Email:</span>
+            <span class="email-value js-email-span">
+              <button class="js-email-button" type="button">Show</button>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section is-last-update">
+    <div class="container">
+      <div class="section--content">
+        <p>last updated: January 10, 2023</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const emailButton = document.querySelector('.js-email-button');
+    const emailWrapper = document.querySelector('.js-email-span');
+    emailButton.addEventListener('click', () => {
+      emailWrapper.innerHTML = atob('ZXJkZ25ibHRAZ21haWwuY29t');
+    });
+  </script>
+{% endblock content %}
