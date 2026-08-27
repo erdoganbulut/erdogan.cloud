@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://erdogan.cloud/sitemap-index.xml

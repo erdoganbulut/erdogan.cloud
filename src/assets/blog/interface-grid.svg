@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Interface grid</title>
+  <desc id="desc">A monochrome arrangement of interface columns and blocks.</desc>
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <g stroke="#303030" stroke-width="1">
+    <path d="M120 0v630M280 0v630M440 0v630M600 0v630M760 0v630M920 0v630M1080 0v630"/>
+    <path d="M0 95h1200M0 225h1200M0 355h1200M0 485h1200"/>
+  </g>
+  <rect x="120" y="95" width="320" height="130" fill="#f5f5f5"/>
+  <rect x="600" y="225" width="320" height="130" fill="#8b8b8b"/>
+  <rect x="280" y="355" width="160" height="130" fill="#3b3b3b"/>
+  <rect x="920" y="355" width="160" height="130" fill="#d4d4d4"/>
+</svg>

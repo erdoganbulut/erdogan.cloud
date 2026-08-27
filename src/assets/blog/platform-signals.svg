@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Platform signals</title>
+  <desc id="desc">Monochrome concentric circles crossed by a precise horizontal signal.</desc>
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <g fill="none" stroke="#3b3b3b" stroke-width="2">
+    <circle cx="600" cy="315" r="80"/>
+    <circle cx="600" cy="315" r="160"/>
+    <circle cx="600" cy="315" r="240"/>
+  </g>
+  <path d="M80 315h1040" stroke="#f5f5f5" stroke-width="3"/>
+  <circle cx="600" cy="315" r="12" fill="#f5f5f5"/>
+  <circle cx="360" cy="315" r="7" fill="#8b8b8b"/>
+  <circle cx="840" cy="315" r="7" fill="#8b8b8b"/>
+</svg>

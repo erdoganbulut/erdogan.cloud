@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"
+---
+
+<BaseLayout
+  title="Not found"
+  description="Page not found."
+  locale="en"
+  alternatePath="/tr/"
+  hasAlternateLocale={false}
+>
+  <section class="site-container" style="padding-block: 5rem 6rem; max-width: 42rem;">
+    <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary); margin-bottom: 1rem;">404 — Not found / Sayfa bulunamadı</p>
+    <h1 style="font-size: clamp(2rem, 3vw, 2.6rem); font-weight: 700; letter-spacing: -0.05em; line-height: 1;">Page not found.</h1>
+    <p style="margin-top: 1rem; color: oklch(0.76 0 0); line-height: 1.7;">The page you are looking for does not exist. / Aradığınız sayfa bulunamadı.</p>
+    <div style="display:flex; gap: 0.75rem; margin-top: 2rem; flex-wrap: wrap;">
+      <a href="/" style="border: 1px solid var(--hairline-strong); background: oklch(1 0 0 / 0.02); border-radius: var(--radius); padding: 0.6rem 1rem; font-family: var(--font-mono); font-size: 0.8rem; text-decoration: none; color: var(--foreground);">← Home</a>
+      <a href="/tr/" style="border: 1px solid var(--hairline-strong); background: oklch(1 0 0 / 0.02); border-radius: var(--radius); padding: 0.6rem 1rem; font-family: var(--font-mono); font-size: 0.8rem; text-decoration: none; color: var(--foreground);">Ana Sayfa →</a>
+      <a href="/blog/" style="border: 1px solid var(--hairline-strong); background: oklch(1 0 0 / 0.02); border-radius: var(--radius); padding: 0.6rem 1rem; font-family: var(--font-mono); font-size: 0.8rem; text-decoration: none; color: var(--foreground);">Blog</a>
+    </div>
+  </section>
+</BaseLayout>
