@@ -16,6 +16,7 @@
 - Blog filenames must remain a single slug segment: routes use `[slug].astro`, not `[...slug].astro`. The locale folder and frontmatter `locale` must agree.
 - The three English blog entries are deliberate dummy content; Turkish currently renders the empty state. Replace them rather than treating them as verified writing.
 - RSS (`/rss.xml`, `/tr/rss.xml`) and sitemap output are generated from the content collection and `astro.config.mjs` site URL.
+- Deploy is GitHub Actions → GHCR → Coolify. `Dockerfile` builds static `dist` to `nginx:alpine`; `docker-compose.yml` pulls `ghcr.io/erdoganbulut/erdogan.cloud:latest` with `Docker Compose` build pack. Push to `main` builds and pushes via `.github/workflows/deploy.yml` then triggers Coolify webhook (`COOLIFY_WEBHOOK` + `COOLIFY_TOKEN`).
 
 ## UI Stack
 
