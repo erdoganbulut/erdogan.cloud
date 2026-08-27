@@ -1,0 +1,10 @@
+---
+import { getEntry } from "astro:content"
+
+import SitePage from "@/components/site/SitePage.astro"
+
+const entry = await getEntry("site", "tr/cv")
+if (!entry) throw new Error("Missing Turkish CV content")
+---
+
+<SitePage entry={entry} alternatePath="/cv/" />

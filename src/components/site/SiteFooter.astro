@@ -1,0 +1,72 @@
+---
+interface Props {
+  locale: "en" | "tr"
+}
+
+const { locale } = Astro.props
+const emailLabel = locale === "en" ? "Email" : "E-posta"
+---
+
+<footer class="site-footer">
+  <div class="site-container footer-inner">
+    <p>© {new Date().getFullYear()} Erdoğan Bulut</p>
+    <nav aria-label={locale === "en" ? "Social links" : "Sosyal bağlantılar"}>
+      <a href="mailto:erdgnblt@gmail.com">{emailLabel}</a>
+      <a href="https://github.com/erdoganbulut">GitHub</a>
+      <a href="https://www.linkedin.com/in/erdoganbulut/">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 0;
+    color: oklch(0.55 0 0);
+    margin-top: 0;
+    background: none;
+    backdrop-filter: none;
+  }
+  .footer-inner {
+    display: flex;
+    min-height: 3.75rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.585rem;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    align-items: center;
+  }
+  nav a {
+    position: relative;
+    padding: 0.18rem 0;
+    opacity: 0.88;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+    transition: color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  }
+  a:hover {
+    color: var(--foreground);
+    border-color: color-mix(in oklch, var(--primary) 42%, transparent);
+    opacity: 1;
+  }
+  @media (max-width: 39rem) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.85rem;
+      padding-block: 1.65rem 1.75rem;
+    }
+  }
+</style>

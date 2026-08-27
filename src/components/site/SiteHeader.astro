@@ -1,0 +1,211 @@
+---
+import logoUrl from "../../../logo.svg?url"
+
+import { LanguageSwitcher } from "./LanguageSwitcher"
+
+interface Props {
+  locale: "en" | "tr"
+  alternatePath: string
+}
+
+const { locale, alternatePath } = Astro.props
+const path = Astro.url.pathname.replace(/\/$/, "") || "/"
+
+const items = locale === "en"
+  ? [
+      { href: "/", label: "Home" },
+      { href: "/consultancy/", label: "Consultancy" },
+      { href: "/cv/", label: "CV" },
+      { href: "/blog/", label: "Blog" },
+    ]
+  : [
+      { href: "/tr/", label: "Ana Sayfa" },
+      { href: "/tr/danismanlik/", label: "Danışmanlık" },
+      { href: "/tr/ozgecmis/", label: "Özgeçmiş" },
+      { href: "/tr/blog/", label: "Blog" },
+    ]
+
+const isCurrent = (href: string) => {
+  const target = href.replace(/\/$/, "") || "/"
+  return target === "/" || target === "/tr"
+    ? path === target
+    : path === target || path.startsWith(`${target}/`)
+}
+
+const navItems = items.map((item) => ({ ...item, current: isCurrent(item.href) }))
+const homeHref = locale === "en" ? "/" : "/tr/"
+const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon"
+---
+
+<header class="site-header">
+  <div class="site-container header-inner">
+    <a href={homeHref} class="brand-link" aria-label="Erdoğan Bulut">
+      <img src={logoUrl} width="145" height="56" alt="Erdoğan Bulut" />
+    </a>
+
+    <div class="nav-row">
+      <nav class="site-nav" aria-label={navigationLabel}>
+        {navItems.map((item) => (
+          <a
+            href={item.href}
+            aria-current={item.current ? "page" : undefined}
+            class:list={["nav-link", { current: item.current }]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </nav>
+      <div class="header-actions">
+        <LanguageSwitcher
+          client:load
+          locale={locale}
+          currentHref={Astro.url.pathname}
+          alternateHref={alternatePath}
+        />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: static;
+    border-bottom: 0;
+    background: transparent;
+  }
+
+  .site-header::before,
+  .site-header::after { display: none; }
+
+  .header-inner {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.28rem;
+    min-height: 3.85rem;
+  }
+
+  .brand-link {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.25rem;
+    opacity: 0.97;
+    transition: opacity 160ms ease, filter 160ms ease;
+  }
+  .brand-link:hover { opacity: 1; filter: brightness(1.08); }
+  .brand-link:focus-visible,
+  .nav-link:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  .brand-link img {
+    width: 5.6rem;
+    height: auto;
+    display: block;
+    opacity: 0.99;
+  }
+
+  .nav-row {
+    display: flex;
+    align-items: center;
+    gap: 0.28rem;
+    margin-left: auto;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.28rem;
+  }
+  .nav-link {
+    position: relative;
+    border-radius: 0.35rem;
+    padding: 0.42rem 0.72rem 0.44rem;
+    color: oklch(0.62 0 0);
+    font-family: var(--font-mono);
+    font-size: 0.585rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 160ms ease, background 160ms ease;
+  }
+  .nav-link:hover {
+    background: oklch(1 0 0 / 0.045);
+    color: oklch(0.94 0 0);
+  }
+  .nav-link.current {
+    color: var(--foreground);
+    font-weight: 600;
+    background: transparent;
+  }
+  .nav-link.current::after {
+    content: "";
+    position: absolute;
+    left: 0.72rem;
+    right: 0.72rem;
+    bottom: 0.06rem;
+    height: 1.25px;
+    background: var(--primary);
+    opacity: 1;
+    border-radius: 1px;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding-left: 0;
+    margin-left: 0.32rem;
+    border-left: 0;
+  }
+
+  @media (max-width: 47.99rem) {
+    .header-inner {
+      flex-direction: column;
+      align-items: stretch;
+      min-height: unset;
+      gap: 0;
+      padding-block: 0.65rem 0;
+    }
+    .brand-link {
+      align-self: flex-start;
+    }
+    .brand-link img { width: 5.15rem; }
+    .nav-row {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 0.65rem;
+      padding-block: 0.45rem 0.60rem;
+      gap: 0.16rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-row::-webkit-scrollbar { display: none; }
+    .site-nav {
+      gap: 0.14rem;
+      flex: 0 0 auto;
+    }
+    .site-nav::-webkit-scrollbar { display: none; }
+    .header-actions {
+      margin-left: 0.40rem;
+      padding-left: 0;
+      border-left: 0;
+      flex: 0 0 auto;
+    }
+    .nav-link {
+      white-space: nowrap;
+      flex: 0 0 auto;
+      padding: 0.44rem 0.60rem 0.46rem;
+      font-size: 0.575rem;
+      letter-spacing: 0.10em;
+    }
+    .nav-link.current::after {
+      left: 0.60rem;
+      right: 0.60rem;
+    }
+  }
+</style>

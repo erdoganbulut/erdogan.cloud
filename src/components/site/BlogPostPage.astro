@@ -1,0 +1,127 @@
+---
+import { getImage, Image } from "astro:assets"
+import { render, type CollectionEntry } from "astro:content"
+import { ArrowLeftIcon } from "lucide-react"
+
+import { buttonVariants } from "@/components/ui/button"
+import BaseLayout from "@/layouts/BaseLayout.astro"
+import { formatBlogDate } from "@/lib/blog"
+
+interface Props {
+  post: CollectionEntry<"blog">
+}
+
+const { post } = Astro.props
+const { Content } = await render(post)
+const { title, description, locale, pubDate, updatedDate, cover, coverAlt } = post.data
+const blogPath = locale === "en" ? "/blog/" : "/tr/blog/"
+const alternatePath = locale === "en" ? "/tr/blog/" : "/blog/"
+const backLabel = locale === "en" ? "Back to blog" : "Bloga dön"
+const socialImage = await getImage({ src: cover, format: "png", width: 1200, height: 630 })
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  locale={locale}
+  alternatePath={alternatePath}
+  hasAlternateLocale={false}
+  type="article"
+  image={socialImage}
+>
+  <article class="site-container article-shell">
+    <header class="article-header">
+      <a href={blogPath} class={buttonVariants({ variant: "ghost", size: "sm" })}>
+        <ArrowLeftIcon data-icon="inline-start" aria-hidden="true" />
+        {backLabel}
+      </a>
+      <time datetime={pubDate.toISOString()}>{formatBlogDate(pubDate, locale)}</time>
+      <h1>{title}</h1>
+      <p>{description}</p>
+      {updatedDate && (
+        <small>
+          {locale === "en" ? "Updated" : "Güncellendi"}: {formatBlogDate(updatedDate, locale)}
+        </small>
+      )}
+    </header>
+
+    <div class="article-cover">
+      <Image src={cover} alt={coverAlt} />
+    </div>
+
+    <div class="prose article-prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-shell {
+    padding-block: 2.5rem 5.5rem;
+  }
+
+  .article-header {
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+
+  .article-header > a {
+    margin-bottom: 2rem;
+  }
+
+  time,
+  small {
+    display: block;
+    color: var(--muted-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  h1 {
+    margin-top: 1.25rem;
+    color: var(--foreground);
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 590;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .article-header > p {
+    max-width: 42rem;
+    margin-top: 1.5rem;
+    color: var(--muted-foreground);
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.65;
+  }
+
+  small {
+    margin-top: 1rem;
+  }
+
+  .article-cover {
+    max-width: 66rem;
+    margin: clamp(2.5rem, 5vw, 4rem) auto;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .article-cover :global(img) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1.9 / 1;
+    object-fit: cover;
+  }
+
+  @media (max-width: 47.99rem) {
+    .article-header > a {
+      margin-bottom: 1rem;
+    }
+
+    .article-cover {
+      margin-block: 2rem;
+    }
+  }
+</style>

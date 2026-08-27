@@ -1,0 +1,10 @@
+---
+import { getEntry } from "astro:content"
+
+import SitePage from "@/components/site/SitePage.astro"
+
+const entry = await getEntry("site", "tr/home")
+if (!entry) throw new Error("Missing Turkish home content")
+---
+
+<SitePage entry={entry} alternatePath="/" />

@@ -1,0 +1,78 @@
+---
+import { render, type CollectionEntry } from "astro:content"
+import { MailIcon } from "lucide-react"
+
+import { CvActions } from "@/components/site/CvActions"
+import { buttonVariants } from "@/components/ui/button"
+import cvPdfUrl from "@/content/erdogan-bulut-cv.pdf?url"
+import enCvSource from "@/content/site/en/cv.mdx?raw"
+import trCvSource from "@/content/site/tr/cv.mdx?raw"
+import BaseLayout from "@/layouts/BaseLayout.astro"
+
+interface Props {
+  entry: CollectionEntry<"site">
+  alternatePath: string
+}
+
+const { entry, alternatePath } = Astro.props
+const { Content } = await render(entry)
+const { title, description, locale, kind, role } = entry.data
+const contactLabel = locale === "en" ? "Email me" : "E-posta gönder"
+const cvLocationMd = locale === "en" ? "Merkez, Giresun / Levent, Istanbul" : "Merkez, Giresun / Levent, İstanbul"
+const cvLinksMd =
+  locale === "en"
+    ? "[Email](mailto:erdgnblt@gmail.com) · [GitHub](https://github.com/erdoganbulut) · [LinkedIn](https://www.linkedin.com/in/erdoganbulut/)"
+    : "[E-posta](mailto:erdgnblt@gmail.com) · [GitHub](https://github.com/erdoganbulut) · [LinkedIn](https://www.linkedin.com/in/erdoganbulut/)"
+const rawCvBody = (locale === "en" ? enCvSource : trCvSource)
+  .replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n+/, "")
+  .replace(/<\/?(?:div|aside)[^>]*>\r?\n*/g, "")
+  .trim()
+const cvMarkdown = `${cvLocationMd}\n\n${cvLinksMd}\n\n${rawCvBody}\n`
+---
+
+<BaseLayout title={title} description={description} locale={locale} alternatePath={alternatePath}>
+  <article class="site-container page-shell">
+    <header class:list={["page-header", { "cv-page-header": kind === "cv" }]}>
+      {kind === "cv" ? (
+        <>
+          <div class="cv-head-actions">
+            <CvActions client:load locale={locale} markdown={cvMarkdown} pdfUrl={cvPdfUrl} />
+          </div>
+          <div class="cv-head-main">
+            <div class="cv-head-left">
+              <h1 class="page-title">{title}</h1>
+              {role && <p class="page-role">{role}</p>}
+            </div>
+            <div class="cv-meta">
+              <p class="cv-location">{locale === "en" ? "Merkez, Giresun / Levent, Istanbul" : "Merkez, Giresun / Levent, İstanbul"}</p>
+              <p class="cv-links">
+                <a href="mailto:erdgnblt@gmail.com">{locale === "en" ? "Email" : "E-posta"}</a><span aria-hidden="true"> · </span><a href="https://github.com/erdoganbulut">GitHub</a><span aria-hidden="true"> · </span><a href="https://www.linkedin.com/in/erdoganbulut/">LinkedIn</a>
+              </p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <div>
+          <h1 class="page-title">{title}</h1>
+          {role && <p class="page-role">{role}</p>}
+        </div>
+      )}
+    </header>
+
+    <div class:list={["prose", `${kind}-prose`]}>
+      <Content />
+    </div>
+
+    {kind === "consultancy" && (
+      <div class="consultancy-contact">
+        <a
+          href="mailto:erdgnblt@gmail.com"
+          class={buttonVariants({ variant: "outline", size: "default" })}
+        >
+          <MailIcon data-icon="inline-start" aria-hidden="true" />
+          {contactLabel}
+        </a>
+      </div>
+    )}
+  </article>
+</BaseLayout>
