@@ -1,0 +1,6 @@
+services:
+  web:
+    image: 'ghcr.io/erdoganbulut/erdogan.cloud:latest'
+    pull_policy: always
+    expose:
+      - '80'

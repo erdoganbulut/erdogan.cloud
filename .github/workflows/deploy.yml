@@ -1,23 +1,42 @@
-name: ci
+name: Build and Deploy
 
 on:
   push:
-    branches: [main, rewrite]
-  workflow_dispatch:
+    branches: ["main"]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+
+      - name: Login to registry
+        uses: docker/login-action@v3
         with:
-          version: 10.30.3
-      - uses: actions/setup-node@v4
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
         with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm check
-      - run: pnpm build
-# ponytail: deploy via Coolify Git App (auto-deploy). No webhook needed; GitHub check is verification only.
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          no-cache: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
