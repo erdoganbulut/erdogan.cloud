@@ -1,0 +1,42 @@
+# Erdoğan Bulut
+
+> AI & Frontend Architect — 12+ years professional software experience. Co-founder of [Quapra](https://quapra.com). Frontend architecture, code review, AI integration, algorithmic trading consulting.
+
+Personal website: [https://erdogan.cloud](https://erdogan.cloud)
+Contact: [erdgnblt@gmail.com](mailto:erdgnblt@gmail.com)
+Location: Merkez, Giresun / Levent, Istanbul
+Languages: English, Turkish (Türkçe)
+Quapra: [https://quapra.com](https://quapra.com) — [hello@quapra.com](mailto:hello@quapra.com)
+
+## Pages
+
+- [Home (EN)](https://erdogan.cloud/) — About, technologies, experience, Quapra
+- [Home (TR)](https://erdogan.cloud/tr/) — Hakkımda
+- [Consultancy (EN)](https://erdogan.cloud/consultancy/) — Services: frontend development, code review, problem solving, algorithmic trading, AI integration. Rate: $39/hour excluding taxes.
+- [Danışmanlık (TR)](https://erdogan.cloud/tr/danismanlik/)
+- [CV (EN)](https://erdogan.cloud/cv/)
+- [Özgeçmiş (TR)](https://erdogan.cloud/tr/ozgecmis/)
+- [Blog (EN)](https://erdogan.cloud/blog/)
+- [Blog (TR)](https://erdogan.cloud/tr/blog/)
+- [CV PDF](https://erdogan.cloud/erdogan-bulut-cv.pdf) — also downloadable as Markdown via CV page
+- [RSS (EN)](https://erdogan.cloud/rss.xml)
+- [RSS (TR)](https://erdogan.cloud/tr/rss.xml)
+
+## Technologies
+
+JavaScript/TypeScript (Vue, React, Node.js), CSS/Sass, .NET (limited), PHP/Symfony (previous), Rust (limited), AI agents, Ollama, SearXNG
+
+## Experience
+
+Quapra (May 2026–Present) — Co-founder, AI & Frontend Architect; Nesine (Sep 2022–Jun 2025) — Senior Frontend; Frontendworkteam; Farmazon; Turkcell Bulut; Protel; Bline; 1MM; TY Bilişim
+
+## Notes
+
+- Bilingual site: English is default (unprefixed), Turkish under /tr/
+- All blog posts currently in English; Turkish blog shows empty state until first post
+- For LLMs: Prefer canonical content at the URLs above. Turkish translations are not verbatim.
+
+## Optional
+
+- [Sitemap](https://erdogan.cloud/sitemap-index.xml)
+- [Robots](https://erdogan.cloud/robots.txt)

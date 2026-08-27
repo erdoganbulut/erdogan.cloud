@@ -27,6 +27,39 @@ const pageTitle = title === "Erdoğan Bulut" ? title : `${title} | Erdoğan Bulu
 const canonical = new URL(Astro.url.pathname, Astro.site)
 const alternate = new URL(alternatePath, Astro.site)
 const oppositeLocale = locale === "en" ? "tr" : "en"
+const ogImageUrl = image ? new URL(image.src, Astro.site).toString() : new URL("/og-image.png", Astro.site).toString()
+const graph: Record<string, unknown>[] = [
+  {
+    "@type": "Person",
+    "@id": "https://erdogan.cloud/#person",
+    name: "Erdoğan Bulut",
+    url: "https://erdogan.cloud/",
+    jobTitle: "AI & Frontend Architect",
+    image: "https://erdogan.cloud/og-image.png",
+    sameAs: ["https://github.com/erdoganbulut", "https://www.linkedin.com/in/erdoganbulut/"],
+  },
+  {
+    "@type": "WebSite",
+    "@id": "https://erdogan.cloud/#website",
+    url: "https://erdogan.cloud/",
+    name: "Erdoğan Bulut",
+    inLanguage: locale === "en" ? "en-US" : "tr-TR",
+    author: { "@id": "https://erdogan.cloud/#person" },
+  },
+]
+if (type === "article") {
+  graph.push({
+    "@type": "BlogPosting",
+    headline: title,
+    description,
+    image: ogImageUrl,
+    url: canonical.toString(),
+    author: { "@id": "https://erdogan.cloud/#person" },
+    inLanguage: locale === "en" ? "en-US" : "tr-TR",
+    isPartOf: { "@id": "https://erdogan.cloud/#website" },
+  })
+}
+const jsonLd = { "@context": "https://schema.org", "@graph": graph }
 ---
 
 <!doctype html>
@@ -39,6 +72,8 @@ const oppositeLocale = locale === "en" ? "tr" : "en"
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonical} />
     {hasAlternateLocale && (
       <>
@@ -54,8 +89,16 @@ const oppositeLocale = locale === "en" ? "tr" : "en"
     <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content="Erdoğan Bulut" />
     <meta property="og:locale" content={locale === "en" ? "en_US" : "tr_TR"} />
-    {image && <meta property="og:image" content={new URL(image.src, Astro.site)} />}
-    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={pageTitle} />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <title>{pageTitle}</title>
   </head>
   <body>
