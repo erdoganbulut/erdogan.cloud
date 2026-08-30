@@ -177,17 +177,21 @@ const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon
       margin-left: 0;
       margin-top: 0.75rem;
       padding-block: 0.30rem 0.45rem;
-      gap: 0;
       justify-content: space-between;
       align-items: center;
+      gap: 0.75rem;
       overflow-x: visible;
       overflow-y: visible;
     }
     .site-nav {
-      display: contents;
+      display: flex;
+      align-items: center;
+      gap: 0.10rem;
+      flex: 0 1 auto;
+      min-width: 0;
     }
     .header-actions {
-      margin-left: 0;
+      margin-left: auto;
       padding-left: 0;
       border-left: 0;
       flex: 0 0 auto;
@@ -210,6 +214,24 @@ const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon
     }
     .nav-link:first-child.current::after {
       left: 0;
+    }
+  }
+
+  @media (max-width: 25rem) {
+    .site-nav {
+      justify-content: space-between;
+      min-width: 15rem;
+      gap: 0;
+    }
+    .nav-link,
+    .nav-link:first-child {
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
+    .nav-link.current::after,
+    .nav-link:first-child.current::after {
+      left: 0.25rem;
+      right: 0.25rem;
     }
   }
 </style>
