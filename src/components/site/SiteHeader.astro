@@ -108,22 +108,22 @@ const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon
   .nav-row {
     display: flex;
     align-items: center;
-    gap: 0.28rem;
+    gap: 0.40rem;
     margin-left: auto;
   }
 
   .site-nav {
     display: flex;
     align-items: center;
-    gap: 0.28rem;
+    gap: 0.40rem;
   }
   .nav-link {
     position: relative;
     border-radius: 0.35rem;
-    padding: 0.42rem 0.72rem 0.44rem;
+    padding: 0.50rem 0.80rem 0.52rem;
     color: oklch(0.62 0 0);
     font-family: var(--font-mono);
-    font-size: 0.585rem;
+    font-size: 0.625rem;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -142,8 +142,8 @@ const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon
   .nav-link.current::after {
     content: "";
     position: absolute;
-    left: 0.72rem;
-    right: 0.72rem;
+    left: 0.80rem;
+    right: 0.80rem;
     bottom: 0.06rem;
     height: 1.25px;
     background: var(--primary);
@@ -156,7 +156,7 @@ const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon
     align-items: center;
     gap: 0.4rem;
     padding-left: 0;
-    margin-left: 0.32rem;
+    margin-left: 0;
     border-left: 0;
   }
 
@@ -166,7 +166,7 @@ const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon
       align-items: stretch;
       min-height: unset;
       gap: 0;
-      padding-block: 0.65rem 0;
+      padding-block: 0.70rem 0;
     }
     .brand-link {
       align-self: flex-start;
@@ -175,37 +175,41 @@ const navigationLabel = locale === "en" ? "Primary navigation" : "Ana navigasyon
     .nav-row {
       width: 100%;
       margin-left: 0;
-      margin-top: 0.65rem;
-      padding-block: 0.45rem 0.60rem;
-      gap: 0.16rem;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      margin-top: 0.75rem;
+      padding-block: 0.30rem 0.45rem;
+      gap: 0;
+      justify-content: space-between;
+      align-items: center;
+      overflow-x: visible;
+      overflow-y: visible;
     }
-    .nav-row::-webkit-scrollbar { display: none; }
     .site-nav {
-      gap: 0.14rem;
-      flex: 0 0 auto;
+      display: contents;
     }
-    .site-nav::-webkit-scrollbar { display: none; }
     .header-actions {
-      margin-left: 0.40rem;
+      margin-left: 0;
       padding-left: 0;
       border-left: 0;
       flex: 0 0 auto;
     }
     .nav-link {
-      white-space: nowrap;
       flex: 0 0 auto;
-      padding: 0.44rem 0.60rem 0.46rem;
-      font-size: 0.575rem;
-      letter-spacing: 0.10em;
+      text-align: center;
+      white-space: nowrap;
+      padding: 0.60rem 0.45rem 0.62rem;
+      font-size: 0.665rem;
+      letter-spacing: 0.09em;
+      justify-content: center;
+    }
+    .nav-link:first-child {
+      padding-left: 0;
     }
     .nav-link.current::after {
-      left: 0.60rem;
-      right: 0.60rem;
+      left: 0.45rem;
+      right: 0.45rem;
+    }
+    .nav-link:first-child.current::after {
+      left: 0;
     }
   }
 </style>
